@@ -5,6 +5,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 //////////// Refactoring 
 import Main from './Components/Main';
+import { BrowserRouter } from "react-router-dom"
 
 import './styles/stylesheets.css';
 
@@ -12,4 +13,4 @@ import './styles/stylesheets.css';
 // ReactDom.render(element, document.getElementById('root'))
 const root = createRoot(document.getElementById('root'));
 // Constructor method of main will automatically will be called
-root.render(<Main />) 
+root.render(<BrowserRouter><Main /></BrowserRouter>) 

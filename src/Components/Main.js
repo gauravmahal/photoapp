@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import Title from './Title';
 import PhotoWall from './PhotoWall';
-
+import AddPhoto from "./AddPhoto";
 
 class Main extends Component {
     constructor() {
         super()
         this.state = {
-            posts: []
+            posts: [],
+            screen: 'photos' // photos, addPhotos
         }
         this.removePhoto = this.removePhoto.bind(this)
-        console.log('constructor')
+        this.navigate = this.navigate.bind(this)
+        // console.log('constructor')
     }
 
     removePhoto(postRemoved) {
@@ -19,26 +21,46 @@ class Main extends Component {
             posts: state.posts.filter(post => post !== postRemoved)
         }))
     }
+
+    navigate() {
+        this.setState({
+            screen: 'addPhotos'
+        })
+    }
+
     // called after components is inserted into the Dom 
     componentDidMount() {
         const data = SimulateFetchFromDatabase();
         this.setState({
             posts: data
         })
-        console.log('componentDidMount')
+        // console.log('componentDidMount')
     }
 
     componentDidUpdate(prevProps, prevState) {
         // alert('re-render')
-        console.log(prevState.posts)
-        console.log(this.state)
+        // console.log(prevState.posts)
+        // console.log(this.state)
     }
 
     render() {
-        console.log('render')
+        // console.log('render')
         return <div>
-            <Title title={"Photowall"} />
-            <PhotoWall posts={this.state.posts} onRemovePhoto={this.removePhoto} />
+            {
+                this.state.screen === 'photos' && (
+                    <div>
+                        <Title title={"Photowall"} />
+                        <PhotoWall posts={this.state.posts} onRemovePhoto={this.removePhoto} onNavigate={this.navigate} />
+                    </div>
+                )
+            }
+
+            {
+                this.state.screen === 'addPhotos' && (
+                    <AddPhoto />
+                )
+            }
+
         </div>
     }
 }

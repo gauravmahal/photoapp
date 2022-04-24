@@ -60,3 +60,12 @@ h1 {
     line-height: 2;
     padding: 5px;
 }
+
+.add-icon {
+    margin: 20px auto;
+    display: table;
+    padding: 40px;
+    background: url("https://upload.wikimedia.org/wikipedia/commons/0/0c/Noun_project_-_plus_round.svg") center no-repeat;
+    background-size: contain;
+    border: none;
+}
