@@ -11,4 +11,5 @@ import './styles/stylesheets.css';
 // // Deprecated in react 18 
 // ReactDom.render(element, document.getElementById('root'))
 const root = createRoot(document.getElementById('root'));
-root.render(<Main />)
+// Constructor method of main will automatically will be called
+root.render(<Main />) 
