@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Title from './Title';
 import PhotoWall from './PhotoWall';
 import AddPhoto from "./AddPhoto";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 class Main extends Component {
     constructor() {
@@ -12,6 +12,7 @@ class Main extends Component {
             // screen: 'photos' // photos, addPhotos
         }
         this.removePhoto = this.removePhoto.bind(this)
+        this.addPhoto = this.addPhoto.bind(this)
         // this.navigate = this.navigate.bind(this)
         // console.log('constructor')
     }
@@ -20,6 +21,12 @@ class Main extends Component {
         console.log(postRemoved.description)
         this.setState((state) => ({
             posts: state.posts.filter(post => post !== postRemoved)
+        }))
+    }
+
+    addPhoto(postSubmitted) {
+        this.setState((state) => ({
+            posts: state.posts.concat([postSubmitted])
         }))
     }
 
@@ -45,16 +52,23 @@ class Main extends Component {
     }
 
     render() {
-        // console.log('render')
+        console.log(this.state.posts)
         return (<div>
             <Routes>
                 <Route path="/" element={
                     < div >
                         <Title title={"Photowall"} />
-                        <PhotoWall posts={this.state.posts} onRemovePhoto={this.removePhoto} onNavigate={this.navigate} />
+                        <PhotoWall posts={this.state.posts} onRemovePhoto={this.removePhoto} />
                     </div>
                 } />
-                <Route path="/AddPhotos" element={<AddPhoto />} />
+                <Route path="/AddPhotos" element={
+                    <div>
+                        <AddPhoto onAddPhoto={(addedPost) => {
+                            this.addPhoto(addedPost);
+                            <Navigate to="/" />
+                        }} />
+                    </div>
+                } />
             </Routes>
         </div >)
     }
@@ -62,16 +76,16 @@ class Main extends Component {
 
 function SimulateFetchFromDatabase() {
     return [{
-        id: "0",
+        id: 0,
         description: "beautiful landscape",
         imageLink: "https://image.jimcdn.com/app/cms/image/transf/none/path/sa6549607c78f5c11/image/i4eeacaa2dbf12d6d/version/1490299332/most-beautiful-landscapes-in-europe-lofoten-european-best-destinations-copyright-iakov-kalinin.jpg" +
             "3919321_1443393332_n.jpg"
     }, {
-        id: "1",
+        id: 1,
         description: "Aliens???",
         imageLink: "https://www.science.org/do/10.1126/science.aax3525/full/Iridium52_16x9.jpg"
     }, {
-        id: "2",
+        id: 2,
         description: "On a vacation!",
         imageLink: "https://fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2017/08/24/104670887-VacationExplainsTHUMBWEB.1910x1000.jpg"
     }]
