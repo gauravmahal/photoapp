@@ -8,7 +8,7 @@ function Photo(props) {
         <figcaption> <p> {post.description}</p></figcaption>
         <div className='button-container'>
             <button onClick={() => {
-                props.onRemovePhoto(post)
+                props.removePost(props.index)
             }}>Remove</button>
         </div>
     </figure>
@@ -16,8 +16,15 @@ function Photo(props) {
 
 Photo.propTypes = {
     post: PropTypes.object.isRequired,
-    onRemovePhoto: PropTypes.func.isRequired
 }
+
+//////////// To inject store into Photo component
+// function mapStateToProps(state) {
+//     return {
+//         posts: state
+//     }
+// }
+// export default connect(mapStateToProps)(Photo)
 
 // class Photo extends Component {
 //     render() {

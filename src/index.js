@@ -4,13 +4,25 @@ import React from 'react';
 // React 18 
 import { createRoot } from 'react-dom/client';
 //////////// Refactoring 
-import Main from './Components/Main';
 import { BrowserRouter } from "react-router-dom"
+// import { createStore } from 'redux'
+import { legacy_createStore as createStore } from 'redux'
+import rootReducer from './redux/reducer'
+import { Provider } from 'react-redux';
 
 import './styles/stylesheets.css';
+import App from './Components/App';
+
+const store = createStore(rootReducer)
 
 // // Deprecated in react 18 
 // ReactDom.render(element, document.getElementById('root'))
 const root = createRoot(document.getElementById('root'));
 // Constructor method of main will automatically will be called
-root.render(<BrowserRouter><Main /></BrowserRouter>) 
+root.render(
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>
+) 

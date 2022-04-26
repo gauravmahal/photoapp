@@ -10,14 +10,13 @@ function PhotoWall(props) {
         <div className='photo-grid'>
             {props.posts
                 .sort((x, y) => y.id - x.id)
-                .map((post, index) => <Photo key={index} post={post} onRemovePhoto={props.onRemovePhoto} />)}
+                .map((post, index) => <Photo key={index} post={post} {...props} index={index} />)}
         </div>
     </div>
 }
 
 PhotoWall.propTypes = {
     posts: PropTypes.array.isRequired,
-    onRemovePhoto: PropTypes.func.isRequired
 }
 
 // class PhotoWall extends Component {
