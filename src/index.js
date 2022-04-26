@@ -13,7 +13,10 @@ import { Provider } from 'react-redux';
 import './styles/stylesheets.css';
 import App from './Components/App';
 
-const store = createStore(rootReducer)
+const store = createStore(
+    rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 // // Deprecated in react 18 
 // ReactDom.render(element, document.getElementById('root'))

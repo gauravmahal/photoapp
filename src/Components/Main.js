@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Title from './Title';
 import PhotoWall from './PhotoWall'
-import { Route, Routes } from "react-router-dom";
+import AddPhoto from './AddPhoto'
+import { Link, Route, Routes } from "react-router-dom";
 
 class Main extends Component {
     constructor() {
@@ -12,21 +12,18 @@ class Main extends Component {
 
     render() {
         return (<div>
+            <h1>
+                <Link to='/'>Photowall</Link>
+            </h1>
             <Routes>
                 <Route path="/" element={
                     < div >
-                        <Title title={"Photowall"} />
                         <PhotoWall {...this.props} />
                     </div>
                 } />
-                {/* <Route path="/AddPhotos" element={
-                    <div>
-                        <AddPhoto onAddPhoto={(addedPost) => {
-                            this.addPhoto(addedPost);
-                            <Navigate to="/" />
-                        }} />
-                    </div>
-                } /> */}
+                <Route path="/AddPhotos" element={
+                    <AddPhoto {...this.props} />
+                } />
             </Routes>
         </div >)
     }
