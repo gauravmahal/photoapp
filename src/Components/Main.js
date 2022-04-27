@@ -4,10 +4,9 @@ import AddPhoto from './AddPhoto'
 import { Link, Route, Routes } from "react-router-dom";
 
 class Main extends Component {
-    constructor() {
-        super()
-        this.state = {
-        }
+
+    componentDidMount() {
+        this.props.startLoadingPost();
     }
 
     render() {
