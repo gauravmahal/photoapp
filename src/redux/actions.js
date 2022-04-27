@@ -1,5 +1,5 @@
 import { database } from "../database/config"
-import { ref, update, onValue } from "firebase/database";
+import { ref, update, onValue, remove } from "firebase/database";
 
 export function startAddingPost(post) {
     return (dispatch) => {
@@ -21,6 +21,14 @@ export function startLoadingPost() {
             dispatch(loadPosts(posts));
         }, {
             onlyOnce: true
+        })
+    }
+}
+
+export function startRemovingPost(index, id) {
+    return (dispatch) => {
+        return remove(ref(database, `posts/${id}`)).then(() => {
+            dispatch(removePost(index))
         })
     }
 }
